@@ -9,9 +9,11 @@ public class Ingredient {
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
+
     @SerializedName("measure")
     @Expose
     private String measure;
+
     @SerializedName("ingredient")
     @Expose
     private String ingredient;
