@@ -7,11 +7,13 @@ import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import eu.napcode.recipes.RecipesApp;
 import eu.napcode.recipes.dependency.modules.ActivityModule;
+import eu.napcode.recipes.dependency.modules.AppModule;
 
 @Singleton
 @Component(modules = {
         AndroidInjectionModule.class,
-        ActivityModule.class
+        ActivityModule.class,
+        AppModule.class
 })
 public interface AppComponent {
 
