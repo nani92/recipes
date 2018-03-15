@@ -1,4 +1,4 @@
-package eu.napcode.recipes.dependency;
+package eu.napcode.recipes.dependency.components;
 
 import javax.inject.Singleton;
 
@@ -6,10 +6,12 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import eu.napcode.recipes.RecipesApp;
+import eu.napcode.recipes.dependency.modules.ActivityModule;
 
 @Singleton
 @Component(modules = {
-        AndroidInjectionModule.class
+        AndroidInjectionModule.class,
+        ActivityModule.class
 })
 public interface AppComponent {
 
