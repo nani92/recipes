@@ -42,4 +42,8 @@ dependencies {
 
     //Live data & ViewModel
     implementation "android.arch.lifecycle:extensions:1.1.0"
+
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
