@@ -1,5 +1,7 @@
 package eu.napcode.recipes;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,13 +10,17 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.api.RecipeService;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
     RecipeService recipeService;
+
+    @Inject
+    ViewModelFactory viewModelFactory;
+
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         AndroidInjection.inject(this);
 
-        recipeService.getRecipes().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> Log.d("Natalia", "N" + response.size()));
+        mainViewModel = ViewModelProviders
+                .of(this, viewModelFactory)
+                .get(MainViewModel.class);
+
     }
 }
