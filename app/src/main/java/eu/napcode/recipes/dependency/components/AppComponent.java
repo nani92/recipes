@@ -9,6 +9,7 @@ import eu.napcode.recipes.RecipesApp;
 import eu.napcode.recipes.dependency.modules.ActivityModule;
 import eu.napcode.recipes.dependency.modules.AppModule;
 import eu.napcode.recipes.dependency.modules.RepositoryModule;
+import eu.napcode.recipes.dependency.modules.RxModule;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
 
 @Singleton
@@ -17,7 +18,8 @@ import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
         ActivityModule.class,
         AppModule.class,
         ViewModelModule.class,
-        RepositoryModule.class
+        RepositoryModule.class,
+        RxModule.class
 })
 public interface AppComponent {
 

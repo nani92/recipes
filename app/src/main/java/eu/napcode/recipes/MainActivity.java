@@ -1,10 +1,8 @@
 package eu.napcode.recipes;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import javax.inject.Inject;
 
