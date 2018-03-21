@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private MainViewModel mainViewModel;
+    private RecipesAdapter recipesAdapter;
 
     private boolean isTwoPane;
 
@@ -32,9 +34,16 @@ public class MainActivity extends AppCompatActivity {
 
         AndroidInjection.inject(this);
         isTwoPane = this.binding.listLayout.recipeDetailContainer != null;
+        setupRecyclerView();
 
         mainViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainViewModel.class);
+    }
+
+    private void setupRecyclerView() {
+        this.binding.listLayout.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        this.recipesAdapter = new RecipesAdapter();
+        this.binding.listLayout.recyclerView.setAdapter(recipesAdapter);
     }
 }
