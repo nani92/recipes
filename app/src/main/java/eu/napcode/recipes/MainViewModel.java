@@ -27,9 +27,9 @@ public class MainViewModel extends ViewModel {
     public LiveData<Resource<List<Recipe>>> getRecipes() {
         recipesRepository
                 .getRecipes()
-                .doOnSubscribe(it -> recipes.setValue(Resource.loading(null)))
                 .subscribeOn(rxSchedulers.io())
                 .observeOn(rxSchedulers.androidMainThread())
+                .doOnSubscribe(it -> recipes.setValue(Resource.loading(null)))
                 .subscribe(recipes -> this.recipes.setValue(Resource.success(recipes)),
                         error -> this.recipes.setValue(Resource.error(error)));
 
