@@ -16,6 +16,7 @@ import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ActivityRecipesBinding;
 import eu.napcode.recipes.recipedetails.RecipeDetailsActivity;
+import eu.napcode.recipes.recipedetails.RecipeDetailsFragment;
 import eu.napcode.recipes.repository.Resource;
 import eu.napcode.recipes.api.RecipeService;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
@@ -88,10 +89,19 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         boolean isTwoPane = this.binding.listLayout.recipeDetailContainer != null;
 
         if (isTwoPane) {
-
+            displayDetailsFragment(recipe);
         } else {
             startDetailsActivity(recipe);
         }
+    }
+
+    private void displayDetailsFragment(Recipe recipe) {
+        RecipeDetailsFragment fragment = RecipeDetailsFragment.newInstance(recipe);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.recipeDetailContainer, fragment)
+                .commit();
     }
 
     private void startDetailsActivity(Recipe recipe) {
