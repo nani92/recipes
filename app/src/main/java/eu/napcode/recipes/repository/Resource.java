@@ -1,11 +1,11 @@
-package eu.napcode.recipes;
+package eu.napcode.recipes.repository;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import static eu.napcode.recipes.Resource.Status.ERROR;
-import static eu.napcode.recipes.Resource.Status.LOADING;
-import static eu.napcode.recipes.Resource.Status.SUCCESS;
+import static eu.napcode.recipes.repository.Resource.Status.ERROR;
+import static eu.napcode.recipes.repository.Resource.Status.LOADING;
+import static eu.napcode.recipes.repository.Resource.Status.SUCCESS;
 
 public class Resource<T> {
 

@@ -1,4 +1,4 @@
-package eu.napcode.recipes.repository;
+package eu.napcode.recipes.repository.recipes;
 
 import java.util.List;
 

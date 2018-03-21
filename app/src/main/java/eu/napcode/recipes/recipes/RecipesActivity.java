@@ -1,24 +1,29 @@
-package eu.napcode.recipes;
+package eu.napcode.recipes.recipes;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import eu.napcode.recipes.R;
+import eu.napcode.recipes.databinding.ActivityRecipesBinding;
+import eu.napcode.recipes.recipedetails.RecipeDetailsActivity;
+import eu.napcode.recipes.repository.Resource;
 import eu.napcode.recipes.api.RecipeService;
-import eu.napcode.recipes.databinding.ActivityMainBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Recipe;
 
-public class MainActivity extends AppCompatActivity {
+import static eu.napcode.recipes.recipedetails.RecipeDetailsFragment.RECIPE_KEY;
+
+public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.RecipeClickListener {
 
     @Inject
     RecipeService recipeService;
@@ -26,24 +31,21 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     ViewModelFactory viewModelFactory;
 
-    private ActivityMainBinding binding;
-    private MainViewModel mainViewModel;
+    private ActivityRecipesBinding binding;
+    private RecipesViewModel mainViewModel;
     private RecipesAdapter recipesAdapter;
-
-    private boolean isTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        this.binding = DataBindingUtil.setContentView(this, R.layout.activity_recipes);
 
         AndroidInjection.inject(this);
-        isTwoPane = this.binding.listLayout.recipeDetailContainer != null;
         setupRecyclerView();
 
         mainViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
-                .get(MainViewModel.class);
+                .get(RecipesViewModel.class);
 
         mainViewModel.getRecipes().observe(this, this::processResponse);
     }
@@ -77,7 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         this.binding.listLayout.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.recipesAdapter = new RecipesAdapter();
+        this.recipesAdapter = new RecipesAdapter(this);
         this.binding.listLayout.recyclerView.setAdapter(recipesAdapter);
+    }
+
+    @Override
+    public void onRecipeClicked(Recipe recipe) {
+        boolean isTwoPane = this.binding.listLayout.recipeDetailContainer != null;
+
+        if (isTwoPane) {
+
+        } else {
+            startDetailsActivity(recipe);
+        }
+    }
+
+    private void startDetailsActivity(Recipe recipe) {
+        Intent intent = new Intent(this, RecipeDetailsActivity.class);
+        intent.putExtra(RECIPE_KEY, recipe);
+
+        startActivity(intent);
     }
 }

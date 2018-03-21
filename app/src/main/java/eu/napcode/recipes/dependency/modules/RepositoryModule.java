@@ -2,8 +2,8 @@ package eu.napcode.recipes.dependency.modules;
 
 import dagger.Binds;
 import dagger.Module;
-import eu.napcode.recipes.repository.RecipesRepository;
-import eu.napcode.recipes.repository.RecipesRepositoryImpl;
+import eu.napcode.recipes.repository.recipes.RecipesRepository;
+import eu.napcode.recipes.repository.recipes.RecipesRepositoryImpl;
 
 @Module
 public interface RepositoryModule {

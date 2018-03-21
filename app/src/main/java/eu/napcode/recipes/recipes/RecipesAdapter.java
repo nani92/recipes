@@ -1,4 +1,4 @@
-package eu.napcode.recipes;
+package eu.napcode.recipes.recipes;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +8,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ItemRecipeBinding;
 import eu.napcode.recipes.model.Recipe;
 
 class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>{
 
     private List<Recipe> recipes = new ArrayList<>();
+    private RecipeClickListener recipeClickListener;
+
+    public RecipesAdapter(RecipeClickListener recipeClickListener) {
+        this.recipeClickListener = recipeClickListener;
+    }
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
@@ -34,6 +40,7 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolde
         Recipe recipe = recipes.get(position);
 
         holder.itemRecipeBinding.recipeNameTextView.setText(recipe.getName());
+        holder.itemRecipeBinding.recipeConstraintLayout.setOnClickListener(view -> recipeClickListener.onRecipeClicked(recipe));
     }
 
     @Override
@@ -46,7 +53,12 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolde
 
         public RecipeViewHolder(ItemRecipeBinding itemRecipeBinding) {
             super(itemRecipeBinding.getRoot());
+
             this.itemRecipeBinding = itemRecipeBinding;
         }
+    }
+
+    public interface RecipeClickListener {
+        void onRecipeClicked(Recipe recipe);
     }
 }

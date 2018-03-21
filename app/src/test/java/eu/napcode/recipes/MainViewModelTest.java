@@ -18,11 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.napcode.recipes.model.Recipe;
-import eu.napcode.recipes.repository.RecipesRepository;
+import eu.napcode.recipes.recipes.RecipesViewModel;
+import eu.napcode.recipes.repository.recipes.RecipesRepository;
+import eu.napcode.recipes.repository.Resource;
 import io.reactivex.Flowable;
 
-import static eu.napcode.recipes.Resource.Status.ERROR;
-import static eu.napcode.recipes.Resource.Status.SUCCESS;
+import static eu.napcode.recipes.repository.Resource.Status.ERROR;
+import static eu.napcode.recipes.repository.Resource.Status.SUCCESS;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,7 +36,7 @@ public class MainViewModelTest {
     @Mock
     RecipesRepository recipesRepository;
 
-    private MainViewModel mainViewModel;
+    private RecipesViewModel mainViewModel;
     private List<Recipe> recipes;
 
     @Mock
@@ -42,7 +44,7 @@ public class MainViewModelTest {
 
     @Before
     public void initial() {
-        mainViewModel = new MainViewModel(recipesRepository, new MockRxSchedulers());
+        mainViewModel = new RecipesViewModel(recipesRepository, new MockRxSchedulers());
 
         this.recipes = new ArrayList<>();
         this.recipes.add(new Recipe());

@@ -12,8 +12,8 @@ import java.util.List;
 
 import eu.napcode.recipes.api.RecipeService;
 import eu.napcode.recipes.model.Recipe;
-import eu.napcode.recipes.repository.RecipesRepository;
-import eu.napcode.recipes.repository.RecipesRepositoryImpl;
+import eu.napcode.recipes.repository.recipes.RecipesRepository;
+import eu.napcode.recipes.repository.recipes.RecipesRepositoryImpl;
 import io.reactivex.Flowable;
 import io.reactivex.subscribers.TestSubscriber;
 
