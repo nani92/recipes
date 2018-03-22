@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
+    <!--<data>
         <variable name="var" type="int"/>
-    </data>
+    </data>-->
+
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,15 +18,15 @@
         android:showDividers="middle">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/recipeDetailsRecyclerView"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/divideGuideLine"
-            tools:listitem="@layout/item_recipe"/>
+            tools:listitem="@layout/item_recipe_detail"/>
 
         <FrameLayout
-            android:id="@+id/recipeDetailContainer"
+            android:id="@+id/detailsContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintLeft_toRightOf="@id/divideGuideLine"
