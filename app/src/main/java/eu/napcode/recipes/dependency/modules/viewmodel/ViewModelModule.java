@@ -13,7 +13,7 @@ import dagger.Binds;
 import dagger.MapKey;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
-import eu.napcode.recipes.MainViewModel;
+import eu.napcode.recipes.recipes.RecipesViewModel;
 
 @Module
 public interface ViewModelModule {
@@ -28,8 +28,8 @@ public interface ViewModelModule {
 
     @IntoMap
     @Binds
-    @ViewModelKey(MainViewModel.class)
-    abstract ViewModel mainViewModel(MainViewModel viewModel);
+    @ViewModelKey(RecipesViewModel.class)
+    abstract ViewModel mainViewModel(RecipesViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory viewModelFactory(ViewModelFactory factory);

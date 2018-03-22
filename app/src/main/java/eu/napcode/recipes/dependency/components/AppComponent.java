@@ -8,6 +8,7 @@ import dagger.android.AndroidInjectionModule;
 import eu.napcode.recipes.RecipesApp;
 import eu.napcode.recipes.dependency.modules.ActivityModule;
 import eu.napcode.recipes.dependency.modules.AppModule;
+import eu.napcode.recipes.dependency.modules.FragmentModule;
 import eu.napcode.recipes.dependency.modules.RepositoryModule;
 import eu.napcode.recipes.dependency.modules.RxModule;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
@@ -19,7 +20,8 @@ import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
         AppModule.class,
         ViewModelModule.class,
         RepositoryModule.class,
-        RxModule.class
+        RxModule.class,
+        FragmentModule.class
 })
 public interface AppComponent {
 
