@@ -14,6 +14,7 @@ import dagger.MapKey;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import eu.napcode.recipes.recipes.RecipesViewModel;
+import eu.napcode.recipes.step.StepViewModel;
 
 @Module
 public interface ViewModelModule {
@@ -30,6 +31,12 @@ public interface ViewModelModule {
     @Binds
     @ViewModelKey(RecipesViewModel.class)
     abstract ViewModel mainViewModel(RecipesViewModel viewModel);
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(StepViewModel.class)
+    abstract ViewModel stepViewModel(StepViewModel viewModel);
+
 
     @Binds
     abstract ViewModelProvider.Factory viewModelFactory(ViewModelFactory factory);
