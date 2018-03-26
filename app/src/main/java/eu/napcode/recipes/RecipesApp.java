@@ -35,7 +35,6 @@ public class RecipesApp extends Application implements HasActivityInjector, HasS
                 .inject(this);
     }
 
-
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return this.dispatchingAndroidInjector;

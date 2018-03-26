@@ -1,7 +1,5 @@
 package eu.napcode.recipes.step;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -15,22 +13,16 @@ import android.view.ViewGroup;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.FragmentStepBinding;
@@ -77,10 +69,22 @@ public class StepFragment extends Fragment{
 
         viewModel.setStep(getArguments().getParcelable(STEP_KEY));
 
+        displayDetails();
+        setupNextStepButton();
+    }
+
+    void displayDetails() {
+        this.binding.titleTextView.setText(this.viewModel.getTitle());
         displayVideo();
+        this.binding.descriptionTextView.setText(this.viewModel.getDescription());
     }
 
     private void displayVideo() {
+
+        if (this.viewModel.hasNoVideo()) {
+            return;
+        }
+
         initializePlayer();
 
         MediaSource mediaSource = new ExtractorMediaSource(
@@ -90,6 +94,8 @@ public class StepFragment extends Fragment{
                 0, null, null, null, 0);
 
         simpleExoPlayer.prepare(mediaSource);
+
+        this.binding.videoPlayer.setVisibility(View.VISIBLE);
     }
 
     private void initializePlayer() {
@@ -100,6 +106,12 @@ public class StepFragment extends Fragment{
 
     private DefaultDataSourceFactory getDataSourceFactory() {
         return new DefaultDataSourceFactory(getContext(),
-                Util.getUserAgent(getContext(), "mediaPlayerSample"));
+                Util.getUserAgent(getContext(), getContext().getString(R.string.app_name)));
+    }
+
+    private void setupNextStepButton() {
+        this.binding.nextStepButton.setOnClickListener(view -> {
+            
+        });
     }
 }

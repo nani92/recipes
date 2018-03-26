@@ -1,6 +1,7 @@
 package eu.napcode.recipes.step;
 
 import android.arch.lifecycle.ViewModel;
+import android.text.TextUtils;
 
 import javax.inject.Inject;
 
@@ -20,5 +21,17 @@ public class StepViewModel extends ViewModel {
 
     public String getVideoUrl() {
         return step.getVideoURL();
+    }
+
+    public String getTitle() {
+        return step.getShortDescription();
+    }
+
+    public String getDescription() {
+        return step.getDescription();
+    }
+
+    public boolean hasNoVideo() {
+        return TextUtils.isEmpty(step.getVideoURL());
     }
 }
