@@ -26,7 +26,6 @@ import io.reactivex.Flowable;
 import static eu.napcode.recipes.repository.Resource.Status.ERROR;
 import static eu.napcode.recipes.repository.Resource.Status.SUCCESS;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class MainViewModelTest {
 

@@ -15,7 +15,7 @@ import eu.napcode.recipes.rx.RxSchedulers;
 
 public class RecipesViewModel extends ViewModel {
 
-    RecipesRepository recipesRepository;
+    public RecipesRepository recipesRepository;
     private final MutableLiveData<Resource<List<Recipe>>> recipes = new MutableLiveData<>();
     private RxSchedulers rxSchedulers;
 

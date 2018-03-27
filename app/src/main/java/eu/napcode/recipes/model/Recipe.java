@@ -12,7 +12,7 @@ public class Recipe implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("name")
     @Expose
@@ -34,7 +34,7 @@ public class Recipe implements Parcelable {
     @Expose
     private String image;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -66,7 +66,7 @@ public class Recipe implements Parcelable {
         this.steps = steps;
     }
 
-    public Integer getServings() {
+    public int getServings() {
         return servings;
     }
 

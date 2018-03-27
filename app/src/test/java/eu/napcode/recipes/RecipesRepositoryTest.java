@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.napcode.recipes.api.RecipeService;
+import eu.napcode.recipes.dao.RecipeDao;
 import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
 import eu.napcode.recipes.repository.recipes.RecipesRepositoryImpl;
@@ -22,12 +23,14 @@ public class RecipesRepositoryTest {
 
     @Mock
     RecipeService recipeService;
+    @Mock
+    RecipeDao recipeDao;
 
     private RecipesRepository recipesRepository;
 
     @Before
     public void initial() {
-        recipesRepository = new RecipesRepositoryImpl(recipeService);
+        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao);
     }
 
     @Test
