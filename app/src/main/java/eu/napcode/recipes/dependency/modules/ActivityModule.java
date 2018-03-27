@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import eu.napcode.recipes.recipedetails.RecipeDetailsActivity;
 import eu.napcode.recipes.recipes.RecipesActivity;
+import eu.napcode.recipes.step.StepActivity;
 
 @Module
 public interface ActivityModule {
@@ -13,4 +14,7 @@ public interface ActivityModule {
 
     @ContributesAndroidInjector
     RecipeDetailsActivity bindDetailsActivity();
+
+    @ContributesAndroidInjector
+    StepActivity bindStepActivity();
 }
