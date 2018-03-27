@@ -6,9 +6,11 @@ import javax.inject.Inject;
 
 import eu.napcode.recipes.api.RecipeService;
 import eu.napcode.recipes.dao.RecipeDao;
+import eu.napcode.recipes.dao.RecipeEntity;
 import eu.napcode.recipes.dao.RecipeMapper;
 import eu.napcode.recipes.model.Recipe;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 
 public class RecipesRepositoryImpl implements RecipesRepository {
 
@@ -29,10 +31,17 @@ public class RecipesRepositoryImpl implements RecipesRepository {
         return recipesFlowable;
     }
 
+    @Override
+    public Maybe<Recipe> getRecipeById(int id) {
+        Maybe<RecipeEntity> recipeMaybe = recipeDao.getRecipeById(id);
+        Maybe<Recipe> recipeMaybe1 = recipeMaybe.map(RecipeMapper::toRecipe);
+        return recipeDao.getRecipeById(id).map(RecipeMapper::toRecipe);
+    }
+
     private void saveRecipes(List<Recipe> recipes) {
 
         for (Recipe recipe: recipes) {
-            this.recipeDao.addRecipe(RecipeMapper.getEntityFromRecipe(recipe));
+            this.recipeDao.addRecipe(RecipeMapper.toEntity(recipe));
         }
     }
 }
