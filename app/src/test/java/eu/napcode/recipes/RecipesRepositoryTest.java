@@ -78,7 +78,7 @@ public class RecipesRepositoryTest {
 
     @Test
     public void testGetRecipeById() {
-        Mockito.when(recipeDao.getRecipeById(Mockito.anyInt()))
+        Mockito.when(recipeDao.getRecipeById(Mockito.anyLong()))
                 .thenReturn(Maybe.just(new RecipeEntity()));
         int id = 0;
 
@@ -89,7 +89,7 @@ public class RecipesRepositoryTest {
 
     @Test
     public void testReturnRecipeByIdEmpty() {
-        Mockito.when(recipeDao.getRecipeById(Mockito.anyInt()))
+        Mockito.when(recipeDao.getRecipeById(Mockito.anyLong()))
                 .thenReturn(Maybe.empty());
 
         TestSubscriber<Recipe> recipeSubscriber = new TestSubscriber<>();
@@ -109,7 +109,7 @@ public class RecipesRepositoryTest {
         TestSubscriber<Recipe> recipeSubscriber = new TestSubscriber<>();
         recipesRepository.getRecipeById(0).toFlowable().subscribe(recipeSubscriber);
 
-        recipeSubscriber.assertValue(recipe ->
-                recipeEntity.getId() != recipeEntity.getId());
+        recipeSubscriber.assertValue(
+                recipe -> recipeEntity.getId() == recipeEntity.getId());
     }
 }

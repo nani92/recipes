@@ -33,8 +33,6 @@ public class RecipesRepositoryImpl implements RecipesRepository {
 
     @Override
     public Maybe<Recipe> getRecipeById(int id) {
-        Maybe<RecipeEntity> recipeMaybe = recipeDao.getRecipeById(id);
-        Maybe<Recipe> recipeMaybe1 = recipeMaybe.map(RecipeMapper::toRecipe);
         return recipeDao.getRecipeById(id).map(RecipeMapper::toRecipe);
     }
 
