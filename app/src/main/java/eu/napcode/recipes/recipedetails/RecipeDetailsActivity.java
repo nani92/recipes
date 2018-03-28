@@ -10,14 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ActivityRecipeDetailsBinding;
-import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.step.StepActivity;
 import eu.napcode.recipes.step.StepFragment;
 
 public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailsAdapter.RecipeDetailClickListener {
 
-    public static final String RECIPE_KEY = "recipe";
+    public static final String RECIPE_ID_KEY = "recipe id";
 
     private ActivityRecipeDetailsBinding binding;
     private RecipeDetailsAdapter recipesDetailsAdapter;
@@ -33,10 +32,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     }
 
     private void setupRecyclerView() {
-        Recipe recipe = getIntent().getParcelableExtra(RECIPE_KEY);
-        this.binding.recipeDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.recipesDetailsAdapter = new RecipeDetailsAdapter(recipe.getSteps(),this);
-        this.binding.recipeDetailsRecyclerView.setAdapter(recipesDetailsAdapter);
+//        int recipeId = getIntent().getIntExtra(RECIPE_ID_KEY, 0);
+//        this.binding.recipeDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        this.recipesDetailsAdapter = new RecipeDetailsAdapter(recipe.getSteps(),this);
+//        this.binding.recipeDetailsRecyclerView.setAdapter(recipesDetailsAdapter);
     }
 
     @Override

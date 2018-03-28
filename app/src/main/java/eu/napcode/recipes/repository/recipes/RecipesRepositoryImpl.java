@@ -26,7 +26,8 @@ public class RecipesRepositoryImpl implements RecipesRepository {
     @Override
     public Flowable<List<Recipe>> getRecipes() {
         Flowable<List<Recipe>> recipesFlowable = this.recipeService.getRecipes();
-        recipesFlowable.subscribe(recipes -> saveRecipes(recipes));
+        recipesFlowable.subscribe(this::saveRecipes,
+                error -> {});
 
         return recipesFlowable;
     }

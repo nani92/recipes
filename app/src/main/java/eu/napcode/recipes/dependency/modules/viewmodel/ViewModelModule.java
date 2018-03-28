@@ -13,6 +13,7 @@ import dagger.Binds;
 import dagger.MapKey;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
+import eu.napcode.recipes.recipedetails.RecipeDetailsViewModel;
 import eu.napcode.recipes.recipes.RecipesViewModel;
 
 @Module
@@ -30,6 +31,11 @@ public interface ViewModelModule {
     @Binds
     @ViewModelKey(RecipesViewModel.class)
     abstract ViewModel mainViewModel(RecipesViewModel viewModel);
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(RecipeDetailsViewModel.class)
+    abstract ViewModel recipeDetailsViewModel(RecipeDetailsViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory viewModelFactory(ViewModelFactory factory);
