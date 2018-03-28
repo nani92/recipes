@@ -46,10 +46,19 @@ public class RecipesRepositoryImpl implements RecipesRepository {
         for (Recipe recipe: recipes) {
             this.recipeDao.addRecipe(RecipeMapper.toEntity(recipe));
 
+            if (recipe.getSteps() == null) {
+                continue;
+            }
+
             for (Step step: recipe.getSteps()) {
                 this.stepDao.addStep(StepMapper.toStepEntity(step, recipe.getId()));
             }
         }
+    }
+
+    @Override
+    public Flowable<List<Step>> getStepsForRecipe(int recipeId) {
+        return stepDao.getAllStepsForRecipe(recipeId).map(StepMapper::toSteps);
     }
 }
 

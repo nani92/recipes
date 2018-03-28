@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eu.napcode.recipes.model.Step;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -96,6 +99,20 @@ public class StepMapperTest {
     @Test
     public void testStepToEntityNullMap() {
         Assert.assertEquals(null, StepMapper.toStepEntity(null, 0));
+    }
+
+    @Test
+    public void testNullToStepsMap() {
+        Assert.assertEquals(0, StepMapper.toSteps(null).size());
+    }
+
+    @Test
+    public void testEntitiesToStepsMap() {
+        List<StepEntity> stepEntities = new ArrayList<>();
+        stepEntities.add(getStepEntity());
+        stepEntities.add(getStepEntity());
+
+        Assert.assertEquals(stepEntities.size(), StepMapper.toSteps(stepEntities).size());
     }
 
     public StepEntity getStepEntity() {

@@ -14,6 +14,7 @@ import eu.napcode.recipes.api.RecipeService;
 import eu.napcode.recipes.dao.recipe.RecipeDao;
 import eu.napcode.recipes.dao.recipe.RecipeEntity;
 import eu.napcode.recipes.dao.step.StepDao;
+import eu.napcode.recipes.dao.step.StepEntity;
 import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
@@ -144,5 +145,37 @@ public class RecipesRepositoryTest {
 
         recipeSubscriber.assertValue(
                 recipe -> recipeEntity.getId() == recipeEntity.getId());
+    }
+
+    @Test
+    public void testGetStepsByRecipeId() {
+        Mockito.when(stepDao.getAllStepsForRecipe(Mockito.anyLong()))
+                .thenReturn(Flowable.empty());
+        int id = 0;
+
+        recipesRepository.getStepsForRecipe(id);
+
+        Mockito.verify(stepDao).getAllStepsForRecipe(id);
+    }
+
+    @Test
+    public void testReturnStepsByRecipeId() {
+        List<StepEntity> steps = getStepEntities();
+        Mockito.when(stepDao.getAllStepsForRecipe(Mockito.anyLong()))
+                .thenReturn(Flowable.fromArray(steps));
+        int id = 0;
+
+        TestSubscriber<List<Step>> stepsSubscriber = new TestSubscriber<>();
+        recipesRepository.getStepsForRecipe(id).subscribe(stepsSubscriber);
+
+        stepsSubscriber.assertValue(steps1 -> steps1.size() == steps.size());
+    }
+
+    public List<StepEntity> getStepEntities() {
+        List<StepEntity> steps = new ArrayList<>();
+        steps.add(new StepEntity());
+        steps.add(new StepEntity());
+
+        return steps;
     }
 }

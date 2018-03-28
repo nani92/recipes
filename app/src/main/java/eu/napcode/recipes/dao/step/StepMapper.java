@@ -1,8 +1,26 @@
 package eu.napcode.recipes.dao.step;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eu.napcode.recipes.model.Step;
 
 public class StepMapper {
+
+    public static List<Step> toSteps(List<StepEntity> stepEntities) {
+
+        if (stepEntities == null || stepEntities.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Step> steps = new ArrayList<>();
+
+        for(StepEntity stepEntity : stepEntities) {
+            steps.add(StepMapper.toStep(stepEntity));
+        }
+
+        return steps;
+    }
 
     public static Step toStep(StepEntity stepEntity) {
 
