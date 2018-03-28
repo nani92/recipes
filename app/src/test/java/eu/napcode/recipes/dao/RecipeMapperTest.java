@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import eu.napcode.recipes.dao.recipe.RecipeEntity;
+import eu.napcode.recipes.dao.recipe.RecipeMapper;
 import eu.napcode.recipes.model.Recipe;
 
 @RunWith(MockitoJUnitRunner.class)

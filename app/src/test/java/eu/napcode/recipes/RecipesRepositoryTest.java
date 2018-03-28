@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.napcode.recipes.api.RecipeService;
-import eu.napcode.recipes.dao.RecipeDao;
-import eu.napcode.recipes.dao.RecipeEntity;
+import eu.napcode.recipes.dao.recipe.RecipeDao;
+import eu.napcode.recipes.dao.recipe.RecipeEntity;
+import eu.napcode.recipes.dao.step.StepDao;
 import eu.napcode.recipes.model.Recipe;
+import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
 import eu.napcode.recipes.repository.recipes.RecipesRepositoryImpl;
 import io.reactivex.Flowable;
@@ -29,11 +31,14 @@ public class RecipesRepositoryTest {
     @Mock
     RecipeDao recipeDao;
 
+    @Mock
+    StepDao stepDao;
+
     private RecipesRepository recipesRepository;
 
     @Before
     public void initial() {
-        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao);
+        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao, stepDao);
     }
 
     @Test
@@ -74,6 +79,34 @@ public class RecipesRepositoryTest {
 
         Mockito.verify(recipeDao, Mockito.after(100).times(recipes.size()))
                 .addRecipe(Mockito.any());
+    }
+
+    @Test
+    public void testSavingStepsToDatabase() {
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(getRecipesWithSteps());
+        Mockito.when(recipeService.getRecipes())
+                .thenReturn(Flowable.fromArray(recipes));
+        Mockito.when(recipeDao.addRecipe(Mockito.any()))
+                .thenReturn(0l);
+        Mockito.when(stepDao.addStep(Mockito.any()))
+                .thenReturn(0l);
+
+        recipesRepository.getRecipes();
+
+        Mockito.verify(stepDao, Mockito.after(100).times(recipes.get(0).getSteps().size()))
+                .addStep(Mockito.any());
+    }
+
+    private Recipe getRecipesWithSteps() {
+        Recipe recipe = new Recipe();
+        List<Step> steps = new ArrayList<>();
+        steps.add(new Step());
+        steps.add(new Step());
+        steps.add(new Step());
+        recipe.setSteps(steps);
+
+        return recipe;
     }
 
     @Test

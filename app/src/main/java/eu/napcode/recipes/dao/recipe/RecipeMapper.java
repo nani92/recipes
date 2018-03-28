@@ -1,4 +1,4 @@
-package eu.napcode.recipes.dao;
+package eu.napcode.recipes.dao.recipe;
 
 import eu.napcode.recipes.model.Recipe;
 

@@ -1,14 +1,9 @@
-package eu.napcode.recipes.dao;
+package eu.napcode.recipes.dao.recipe;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.List;
-
-import eu.napcode.recipes.model.Step;
-
-import static eu.napcode.recipes.dao.RecipeEntity.TABLE_NAME;
-
+import static eu.napcode.recipes.dao.recipe.RecipeEntity.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
 public class RecipeEntity {
@@ -20,7 +15,6 @@ public class RecipeEntity {
     private String name;
     private int servings;
     private String imageUrl;
-//    private List<Step> steps;
 
     public int getId() {
         return id;
@@ -53,12 +47,4 @@ public class RecipeEntity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-//    public List<Step> getSteps() {
-//        return steps;
-//    }
-//
-//    public void setSteps(List<Step> steps) {
-//        this.steps = steps;
-//    }
 }

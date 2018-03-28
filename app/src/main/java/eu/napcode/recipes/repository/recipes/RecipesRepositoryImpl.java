@@ -5,10 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import eu.napcode.recipes.api.RecipeService;
-import eu.napcode.recipes.dao.RecipeDao;
-import eu.napcode.recipes.dao.RecipeEntity;
-import eu.napcode.recipes.dao.RecipeMapper;
+import eu.napcode.recipes.dao.recipe.RecipeDao;
+import eu.napcode.recipes.dao.recipe.RecipeMapper;
+import eu.napcode.recipes.dao.step.StepDao;
+import eu.napcode.recipes.dao.step.StepMapper;
 import eu.napcode.recipes.model.Recipe;
+import eu.napcode.recipes.model.Step;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
@@ -16,11 +18,13 @@ public class RecipesRepositoryImpl implements RecipesRepository {
 
     private RecipeService recipeService;
     private RecipeDao recipeDao;
+    private StepDao stepDao;
 
     @Inject
-    public RecipesRepositoryImpl(RecipeService recipeService, RecipeDao recipeDao) {
+    public RecipesRepositoryImpl(RecipeService recipeService, RecipeDao recipeDao, StepDao stepDao) {
         this.recipeService = recipeService;
         this.recipeDao = recipeDao;
+        this.stepDao = stepDao;
     }
 
     @Override
@@ -41,6 +45,10 @@ public class RecipesRepositoryImpl implements RecipesRepository {
 
         for (Recipe recipe: recipes) {
             this.recipeDao.addRecipe(RecipeMapper.toEntity(recipe));
+
+            for (Step step: recipe.getSteps()) {
+                this.stepDao.addStep(StepMapper.toStepEntity(step, recipe.getId()));
+            }
         }
     }
 }

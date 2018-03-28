@@ -8,7 +8,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import eu.napcode.recipes.RecipeDataBase;
-import eu.napcode.recipes.dao.RecipeDao;
+import eu.napcode.recipes.dao.recipe.RecipeDao;
+import eu.napcode.recipes.dao.step.StepDao;
 
 @Module
 public class StorageModule {
@@ -26,5 +27,11 @@ public class StorageModule {
     @Provides
     RecipeDao bookDao(Context context) {
         return bookDataBase(context).recipeDao();
+    }
+
+    @Singleton
+    @Provides
+    StepDao stepDao(Context context) {
+        return bookDataBase(context).stepDao();
     }
 }
