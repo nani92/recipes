@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.repository.Resource;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
@@ -33,7 +32,13 @@ public class RecipeDetailsViewModel extends ViewModel {
     }
 
     public LiveData<Resource<List<Step>>> getSteps() {
-
+        recipesRepository
+                .getStepsForRecipe(recipeId)
+                .subscribeOn(this.rxSchedulers.io())
+                .observeOn(this.rxSchedulers.androidMainThread())
+                .doOnSubscribe(it -> steps.postValue(Resource.loading(null)))
+                .subscribe(steps -> this.steps.postValue(Resource.success(steps)),
+                        error -> this.steps.postValue(Resource.error(error)));
 
         return steps;
     }
