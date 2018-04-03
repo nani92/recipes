@@ -19,9 +19,13 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
 
     //TODO add ingredients to display
 
-    public RecipeDetailsAdapter(List<Step> steps, RecipeDetailClickListener recipeClickListener) {
-        this.steps = steps;
+    public RecipeDetailsAdapter(RecipeDetailClickListener recipeClickListener) {
         this.recipeDetailClickListener = recipeClickListener;
+    }
+
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
+        notifyItemRangeInserted(0, steps.size());
     }
 
     @Override

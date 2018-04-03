@@ -26,7 +26,6 @@ import io.reactivex.Flowable;
 import static eu.napcode.recipes.repository.Resource.Status.ERROR;
 import static eu.napcode.recipes.repository.Resource.Status.SUCCESS;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class MainViewModelTest {
 
@@ -50,7 +49,6 @@ public class MainViewModelTest {
         this.recipes.add(new Recipe());
     }
 
-
     @Test
     public void isRepositoryConnected() {
         Assert.assertNotNull(mainViewModel.recipesRepository);
@@ -73,6 +71,8 @@ public class MainViewModelTest {
 
         LiveData<Resource<List<Recipe>>> recipeLiveData = mainViewModel.getRecipes();
         recipeLiveData.observeForever(recipeObserver);
+
+        Mockito.verify(recipeObserver).onChanged(Mockito.any());
 
         Assert.assertEquals(SUCCESS, recipeLiveData.getValue().status);
         Assert.assertEquals(recipes, recipeLiveData.getValue().data);
