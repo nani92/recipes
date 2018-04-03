@@ -2,6 +2,7 @@ package eu.napcode.recipes;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -176,6 +177,21 @@ public class RecipesRepositoryTest {
         recipesRepository.getStepsForRecipe(id).subscribe(stepsSubscriber);
 
         stepsSubscriber.assertValue(steps1 -> steps1.size() == steps.size());
+    }
+
+    @Test
+    public void testReturnInfoForMoreStepsInRecipe() {
+        List<StepEntity> steps = getStepEntities();
+        Mockito.when(stepDao.getAllStepsForRecipe(Mockito.anyLong()))
+                .thenReturn(Flowable.fromArray(steps));
+        int id = 0;
+
+        recipesRepository.getStepsForRecipe(id);
+        boolean shouldHasNext = recipesRepository.hasNextStepForRecipe(id, 0);
+        boolean shouldNotHasNext = recipesRepository.hasNextStepForRecipe(id, 1);
+
+        Assert.assertEquals(true, shouldHasNext);
+        Assert.assertEquals(false, shouldNotHasNext);
     }
 
     public List<StepEntity> getStepEntities() {

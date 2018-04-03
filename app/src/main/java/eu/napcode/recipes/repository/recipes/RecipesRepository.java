@@ -14,5 +14,9 @@ public interface RecipesRepository {
    Maybe<Recipe> getRecipeById(int id);
 
    Flowable<List<Step>> getStepsForRecipe(int recipeId);
+
+   boolean hasNextStepForRecipe(int recipeId, int stepId);
+
+   Maybe<Step> getNextStepForRecipe(int recipeId, int stepId);
 }
 
