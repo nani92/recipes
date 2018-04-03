@@ -11,6 +11,7 @@ import eu.napcode.recipes.dependency.modules.AppModule;
 import eu.napcode.recipes.dependency.modules.FragmentModule;
 import eu.napcode.recipes.dependency.modules.RepositoryModule;
 import eu.napcode.recipes.dependency.modules.RxModule;
+import eu.napcode.recipes.dependency.modules.StorageModule;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
 
 @Singleton
@@ -21,7 +22,8 @@ import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelModule;
         ViewModelModule.class,
         RepositoryModule.class,
         RxModule.class,
-        FragmentModule.class
+        FragmentModule.class,
+        StorageModule.class
 })
 public interface AppComponent {
 
