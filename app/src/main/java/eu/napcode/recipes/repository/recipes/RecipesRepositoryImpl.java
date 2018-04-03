@@ -11,26 +11,31 @@ import eu.napcode.recipes.dao.step.StepDao;
 import eu.napcode.recipes.dao.step.StepMapper;
 import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.model.Step;
+import eu.napcode.recipes.rx.RxSchedulers;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
 public class RecipesRepositoryImpl implements RecipesRepository {
 
+    private final RxSchedulers rxSchedulers;
     private RecipeService recipeService;
     private RecipeDao recipeDao;
     private StepDao stepDao;
 
     @Inject
-    public RecipesRepositoryImpl(RecipeService recipeService, RecipeDao recipeDao, StepDao stepDao) {
+    public RecipesRepositoryImpl(RecipeService recipeService, RecipeDao recipeDao, StepDao stepDao, RxSchedulers rxSchedulers) {
         this.recipeService = recipeService;
         this.recipeDao = recipeDao;
         this.stepDao = stepDao;
+        this.rxSchedulers = rxSchedulers;
     }
 
     @Override
     public Flowable<List<Recipe>> getRecipes() {
         Flowable<List<Recipe>> recipesFlowable = this.recipeService.getRecipes();
-        recipesFlowable.subscribe(this::saveRecipes,
+        recipesFlowable
+                .subscribeOn(rxSchedulers.io())
+                .subscribe(this::saveRecipes,
                 error -> {});
 
         return recipesFlowable;

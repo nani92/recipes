@@ -8,7 +8,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Step implements Parcelable {
-    //TODO remove parc
 
     @SerializedName("id")
     @Expose

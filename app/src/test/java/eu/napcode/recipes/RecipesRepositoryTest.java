@@ -1,7 +1,11 @@
 package eu.napcode.recipes;
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,6 +30,9 @@ import io.reactivex.subscribers.TestSubscriber;
 @RunWith(MockitoJUnitRunner.class)
 public class RecipesRepositoryTest {
 
+    @Rule
+    public TestRule rule = new InstantTaskExecutorRule();
+
     @Mock
     RecipeService recipeService;
 
@@ -39,7 +46,7 @@ public class RecipesRepositoryTest {
 
     @Before
     public void initial() {
-        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao, stepDao);
+        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao, stepDao, new MockRxSchedulers());
     }
 
     @Test
