@@ -91,7 +91,19 @@ public class RecipesRepositoryImpl implements RecipesRepository {
     }
 
     @Override
-    public Maybe<Step> getNextStepForRecipe(int recipeId, int stepId) {
+    public Step getStepForRecipe(int recipeId, int stepId) {
+
+        if (recipeId != this.recipeId) {
+            return null;
+        }
+
+        for (Step step: steps) {
+
+            if (step.getId() == stepId) {
+                return step;
+            }
+        }
+
         return null;
     }
 }

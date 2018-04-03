@@ -17,6 +17,6 @@ public interface RecipesRepository {
 
    boolean hasNextStepForRecipe(int recipeId, int stepId);
 
-   Maybe<Step> getNextStepForRecipe(int recipeId, int stepId);
+   Step getStepForRecipe(int recipeId, int stepId);
 }
 

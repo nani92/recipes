@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
-import eu.napcode.recipes.model.Step;
 
 public class StepActivity extends AppCompatActivity {
 
-    public static String STEP_KEY = "step";
+    public static String STEP_ID_KEY = "step id ";
+    public static String RECIPE_ID_KEY = "recipe id";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,15 +19,13 @@ public class StepActivity extends AppCompatActivity {
 
         AndroidInjection.inject(this);
 
-        StepFragment fragment = StepFragment.newInstance(getStepFromIntent());
+        StepFragment fragment = StepFragment.newInstance(
+                getIntent().getIntExtra(STEP_ID_KEY, 0),
+                getIntent().getIntExtra(RECIPE_ID_KEY, 0));
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.stepContainer, fragment)
+                .replace(R.id.detailsContainer, fragment)
                 .commit();
-    }
-
-    private Step getStepFromIntent() {
-        return getIntent().getParcelableExtra(STEP_KEY);
     }
 }

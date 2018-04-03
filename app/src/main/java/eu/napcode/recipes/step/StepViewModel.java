@@ -1,37 +1,40 @@
 package eu.napcode.recipes.step;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.text.TextUtils;
 
 import javax.inject.Inject;
 
 import eu.napcode.recipes.model.Step;
+import eu.napcode.recipes.repository.recipes.RecipesRepository;
 
 public class StepViewModel extends ViewModel {
 
-    private Step step;
+    private RecipesRepository recipesRepository;
+
+    private int recipeId;
+    private int stepId;
+
+    private MutableLiveData<Step> stepMutableLiveData = new MutableLiveData<>();
 
     @Inject
-    public StepViewModel() {
+    public StepViewModel(RecipesRepository recipesRepository) {
+        this.recipesRepository = recipesRepository;
     }
 
-    public void setStep(Step step) {
-        this.step = step;
+    public void setStepInfo(int stepId, int recipeId) {
+        this.recipeId = recipeId;
+        this.stepId = stepId;
     }
 
-    public String getVideoUrl() {
-        return step.getVideoURL();
+    public LiveData<Step> getStep() {
+        stepMutableLiveData.postValue(recipesRepository.getStepForRecipe(this.recipeId, this.stepId));
+
+        return stepMutableLiveData;
     }
 
-    public String getTitle() {
-        return step.getShortDescription();
-    }
-
-    public String getDescription() {
-        return step.getDescription();
-    }
-
-    public boolean hasNoVideo() {
-        return TextUtils.isEmpty(step.getVideoURL());
+    public boolean hasNextStep() {
+        return recipesRepository.hasNextStepForRecipe(recipeId, stepId);
     }
 }

@@ -29,19 +29,22 @@ import eu.napcode.recipes.databinding.FragmentStepBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Step;
 
-public class StepFragment extends Fragment{
+public class StepFragment extends Fragment {
 
     @Inject
     ViewModelFactory viewModelFactory;
 
-    public static final String STEP_KEY = "step";
+    public static final String STEP_ID_KEY = "step id";
+    public static final String RECIPE_ID_KEY = "recipe id";
+
     private StepViewModel viewModel;
     private FragmentStepBinding binding;
     private SimpleExoPlayer simpleExoPlayer;
 
-    public static StepFragment newInstance(Step step) {
+    public static StepFragment newInstance(int stepId, int recipeId) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(STEP_KEY, step);
+        bundle.putInt(STEP_ID_KEY, stepId);
+        bundle.putInt(RECIPE_ID_KEY, recipeId);
 
         StepFragment fragment = new StepFragment();
         fragment.setArguments(bundle);
@@ -67,28 +70,35 @@ public class StepFragment extends Fragment{
                 .of(this, viewModelFactory)
                 .get(StepViewModel.class);
 
-        viewModel.setStep(getArguments().getParcelable(STEP_KEY));
+        viewModel.setStepInfo(getArguments().getInt(STEP_ID_KEY),
+                getArguments().getInt(RECIPE_ID_KEY));
 
-        displayDetails();
+        viewModel.getStep().observe(this,
+                step -> displayStepDetails(step));
         setupNextStepButton();
     }
 
-    void displayDetails() {
-        this.binding.titleTextView.setText(this.viewModel.getTitle());
-        displayVideo();
-        this.binding.descriptionTextView.setText(this.viewModel.getDescription());
+    void displayStepDetails(Step step) {
+
+        if (step == null) {
+            //TODO display something
+        }
+
+        this.binding.titleTextView.setText(step.getShortDescription());
+        displayVideo(step);
+        this.binding.descriptionTextView.setText(step.getDescription());
     }
 
-    private void displayVideo() {
+    private void displayVideo(Step step) {
 
-        if (this.viewModel.hasNoVideo()) {
+        if (step.getVideoURL().isEmpty()) {
             return;
         }
 
         initializePlayer();
 
         MediaSource mediaSource = new ExtractorMediaSource(
-                Uri.parse(viewModel.getVideoUrl()),
+                Uri.parse(step.getVideoURL()),
                 getDataSourceFactory(),
                 new DefaultExtractorsFactory(),
                 0, null, null, null, 0);
@@ -110,8 +120,20 @@ public class StepFragment extends Fragment{
     }
 
     private void setupNextStepButton() {
-        this.binding.nextStepButton.setOnClickListener(view -> {
-            
-        });
+
+        if (viewModel.hasNextStep()) {
+
+            StepFragment fragment = newInstance(getArguments().getInt(STEP_ID_KEY) + 1,
+                    getArguments().getInt(RECIPE_ID_KEY));
+
+            this.binding.nextStepButton.setOnClickListener(view -> {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.detailsContainer, fragment)
+                        .commit();
+            });
+        } else {
+            this.binding.nextStepButton.setEnabled(false);
+        }
     }
 }
