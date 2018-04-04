@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/recipeConstraintLayout"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/base_margin"
+        android:layout_marginRight="@dimen/base_margin"
+        android:layout_marginTop="@dimen/small_margin">
 
-        <TextView
-            android:id="@+id/recipeNameTextView"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/recipeConstraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="recipe"/>
+            android:layout_margin="@dimen/base_margin">
 
-    </android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/recipeImageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/imageGuideline"
+                tools:src="@drawable/ic_cupcake"/>
+
+            <TextView
+                android:id="@+id/recipeNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/details_text_size"
+                app:layout_constraintBottom_toBottomOf="@id/recipeImageView"
+                app:layout_constraintLeft_toRightOf="@id/imageGuideline"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/recipeImageView"
+                tools:text="@tools:sample/lorem"
+            android:layout_marginLeft="@dimen/small_margin"/>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/imageGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.3"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 </layout>
