@@ -84,7 +84,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     }
 
     private void displayStepFragment(Step step) {
-        StepFragment fragment = StepFragment.newInstance(step);
+        StepFragment fragment = StepFragment.newInstance(step.getId(), getIntent().getIntExtra(RECIPE_ID_KEY, 0));
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -94,7 +94,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
     private void displayStepActivity(Step step) {
         Intent intent = new Intent(this, StepActivity.class);
-        intent.putExtra(StepActivity.STEP_KEY, step);
+        intent.putExtra(StepActivity.STEP_ID_KEY, step.getId());
+        intent.putExtra(StepActivity.RECIPE_ID_KEY, getIntent().getIntExtra(RECIPE_ID_KEY, 0));
 
         startActivity(intent);
     }

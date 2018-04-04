@@ -25,7 +25,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         if (creator == null) {
             creator = getCreatorFromCreatorSet(modelClass);
         }
-
+        
         return (T) creator.get();
     }
 

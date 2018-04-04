@@ -7,6 +7,6 @@ import eu.napcode.recipes.step.StepFragment;
 @Module
 public interface FragmentModule {
 
-//    @ContributesAndroidInjector
-//    StepFragment bindStepFragment();
+    @ContributesAndroidInjector
+    StepFragment bindStepFragment();
 }

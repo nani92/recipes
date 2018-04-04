@@ -2,6 +2,7 @@ package eu.napcode.recipes;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -178,11 +179,49 @@ public class RecipesRepositoryTest {
         stepsSubscriber.assertValue(steps1 -> steps1.size() == steps.size());
     }
 
+    @Test
+    public void testReturnInfoForMoreStepsInRecipe() {
+        List<StepEntity> steps = getStepEntities();
+        Mockito.when(stepDao.getAllStepsForRecipe(Mockito.anyLong()))
+                .thenReturn(Flowable.fromArray(steps));
+        int id = 0;
+
+        recipesRepository.getStepsForRecipe(id);
+        boolean shouldHasNext = recipesRepository.hasNextStepForRecipe(id, 0);
+        boolean shouldNotHasNext = recipesRepository.hasNextStepForRecipe(id, 1);
+
+        Assert.assertEquals(true, shouldHasNext);
+        Assert.assertEquals(false, shouldNotHasNext);
+    }
+
+    @Test
+    public void testReturnStep() {
+        List<StepEntity> steps = getStepEntities();
+        Mockito.when(stepDao.getAllStepsForRecipe(Mockito.anyLong()))
+                .thenReturn(Flowable.fromArray(steps));
+        int id = 0;
+
+        recipesRepository.getStepsForRecipe(id);
+
+        Step shouldBeStep = recipesRepository.getStepForRecipe(id, 0);
+        Step shouldNotBeStep = recipesRepository.getStepForRecipe(id, 2);
+
+        Assert.assertNotNull(shouldBeStep);
+        Assert.assertNull(shouldNotBeStep);
+    }
+
     public List<StepEntity> getStepEntities() {
         List<StepEntity> steps = new ArrayList<>();
-        steps.add(new StepEntity());
-        steps.add(new StepEntity());
+        steps.add(getStepEntityWithId(0));
+        steps.add(getStepEntityWithId(1));
 
         return steps;
+    }
+
+    private StepEntity getStepEntityWithId(int id) {
+        StepEntity stepEntity = new StepEntity();
+        stepEntity.setId(id);
+
+        return stepEntity;
     }
 }
