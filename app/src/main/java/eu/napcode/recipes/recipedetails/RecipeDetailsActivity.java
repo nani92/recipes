@@ -46,7 +46,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
     private void setupRecyclerView() {
         this.binding.recipeDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.recipesDetailsAdapter = new RecipeDetailsAdapter(this);
+        this.recipesDetailsAdapter = new RecipeDetailsAdapter(this,this);
         this.binding.recipeDetailsRecyclerView.setAdapter(recipesDetailsAdapter);
     }
 
