@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,14 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolde
 
         holder.itemRecipeBinding.recipeNameTextView.setText(recipe.getName());
         holder.itemRecipeBinding.recipeConstraintLayout.setOnClickListener(view -> recipeClickListener.onRecipeClicked(recipe));
+
+        if (recipe.getImage().isEmpty()) {
+            return;
+        }
+
+        Picasso.get()
+                .load(recipe.getImage())
+                .into(holder.itemRecipeBinding.recipeImageView);
     }
 
     @Override

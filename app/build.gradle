@@ -72,4 +72,7 @@ dependencies {
 
     //exoplayer
     compile 'com.google.android.exoplayer:exoplayer:2.7.1'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
