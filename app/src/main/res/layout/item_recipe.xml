@@ -22,22 +22,31 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:src="@drawable/ic_cupcake"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/imageGuideline"
-                android:src="@drawable/ic_cupcake"/>
+                app:layout_constraintRight_toLeftOf="@id/imageGuideline"/>
 
             <TextView
                 android:id="@+id/recipeNameTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/details_text_size"
                 app:layout_constraintBottom_toBottomOf="@id/recipeImageView"
                 app:layout_constraintLeft_toRightOf="@id/imageGuideline"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/recipeImageView"
-                tools:text="@tools:sample/lorem"
-            android:layout_marginLeft="@dimen/small_margin"/>
+                tools:text="@tools:sample/lorem"/>
+
+            <TextView
+                android:id="@+id/servingsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@id/recipeConstraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/recipeNameTextView"
+                tools:text="@tools:sample/lorem"/>
 
             <android.support.constraint.Guideline
                 android:id="@+id/imageGuideline"
