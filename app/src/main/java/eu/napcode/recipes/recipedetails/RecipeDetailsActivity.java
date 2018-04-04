@@ -43,6 +43,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         setupRecyclerView();
         setupViewModel();
         viewModel.getSteps().observe(this, this::processResponse);
+
+        getSupportActionBar().setTitle(getIntent().getStringExtra(RECIPE_NAME));
     }
 
     private void setupRecyclerView() {
