@@ -136,4 +136,13 @@ public class StepFragment extends Fragment {
             this.binding.nextStepButton.setEnabled(false);
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (simpleExoPlayer != null) {
+            simpleExoPlayer.release();
+        }
+    }
 }

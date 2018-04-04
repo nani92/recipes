@@ -45,9 +45,11 @@
 
             <Button
                 android:id="@+id/nextStepButton"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_margin"
+                android:layout_marginTop="@dimen/base_margin"
                 android:text="@string/next_step"
                 app:layout_constraintLeft_toRightOf="@id/leftGuideline"
                 app:layout_constraintRight_toLeftOf="@id/rightGuideline"
