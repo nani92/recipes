@@ -21,6 +21,7 @@ import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Recipe;
 
 import static eu.napcode.recipes.recipedetails.RecipeDetailsActivity.RECIPE_ID_KEY;
+import static eu.napcode.recipes.recipedetails.RecipeDetailsActivity.RECIPE_NAME;
 
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.RecipeClickListener {
 
@@ -83,6 +84,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     public void onRecipeClicked(Recipe recipe) {
         Intent intent = new Intent(this, RecipeDetailsActivity.class);
         intent.putExtra(RECIPE_ID_KEY, recipe.getId());
+        intent.putExtra(RECIPE_NAME, recipe.getName());
 
         startActivity(intent);
     }

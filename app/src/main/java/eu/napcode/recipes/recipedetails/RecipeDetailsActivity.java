@@ -24,6 +24,7 @@ import eu.napcode.recipes.step.StepFragment;
 public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailsAdapter.RecipeDetailClickListener {
 
     public static final String RECIPE_ID_KEY = "recipe id";
+    public static final String RECIPE_NAME = "recipe name";
 
     private ActivityRecipeDetailsBinding binding;
     private RecipeDetailsAdapter recipesDetailsAdapter;
