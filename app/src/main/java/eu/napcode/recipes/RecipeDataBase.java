@@ -10,7 +10,7 @@ import eu.napcode.recipes.dao.recipe.RecipeEntity;
 import eu.napcode.recipes.dao.step.StepDao;
 import eu.napcode.recipes.dao.step.StepEntity;
 
-@Database(entities = {RecipeEntity.class, StepEntity.class, IngredientEntity.class}, version = 1)
+@Database(entities = {RecipeEntity.class, StepEntity.class, IngredientEntity.class}, version = 2)
 public abstract class RecipeDataBase extends RoomDatabase{
     public static final String RECIPES_DATA_BASE_NAME = "recipe db";
 

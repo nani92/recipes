@@ -5,9 +5,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -62,16 +64,18 @@ public class IngredientsFragment extends Fragment {
                 getArguments().getInt(RECIPE_ID_KEY));
 
         viewModel.getIngredients().observe(this,
-                ingredients -> displayStepDetails(ingredients));
+                ingredients -> displayIngredients(ingredients));
     }
 
-    void displayStepDetails(List<Ingredient> ingredients) {
+    void displayIngredients(List<Ingredient> ingredients) {
 
         if (ingredients == null) {
             //TODO display something
         }
 
-//        this.binding.titleTextView.setText(step.getShortDescription());
-//        this.binding.descriptionTextView.setText(step.getDescription());
+        this.binding.ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        this.binding.ingredientsRecyclerView.setAdapter(new IngredientsAdapter(ingredients));
+        this.binding.ingredientsRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_rv));
+        this.binding.ingredientsRecyclerView.scheduleLayoutAnimation();
     }
 }

@@ -70,6 +70,7 @@ public class RecipesRepositoryImpl implements RecipesRepository {
                 this.stepDao.addStep(StepMapper.toStepEntity(step, recipe.getId()));
             }
 
+            this.ingredientDao.deleteAllForRecipe(recipe.getId());
             for (Ingredient ingredient: recipe.getIngredients()) {
                 this.ingredientDao.addIngredient(IngredientMapper.toIngredientEntity(ingredient, recipe.getId()));
             }
@@ -78,7 +79,7 @@ public class RecipesRepositoryImpl implements RecipesRepository {
 
     @Override
     public Flowable<List<Step>> getStepsForRecipe(int recipeId) {
-        Flowable<List<Step>> listFlowable = stepDao.getAllStepsForRecipe(recipeId).map(StepMapper::toSteps);
+         Flowable<List<Step>> listFlowable = stepDao.getAllStepsForRecipe(recipeId).map(StepMapper::toSteps);
         listFlowable.subscribeOn(this.rxSchedulers.io())
                 .observeOn(this.rxSchedulers.androidMainThread())
                 .subscribe(steps1 -> {
