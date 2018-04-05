@@ -1,4 +1,4 @@
-package eu.napcode.recipes.recipedetails;
+package eu.napcode.recipes.ui.recipedetails;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -17,7 +17,7 @@ import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ItemRecipeDetailBinding;
 import eu.napcode.recipes.model.Step;
 
-class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.RecipeDetailsViewHolder>{
+class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.RecipeDetailsViewHolder> {
 
     private List<Step> steps = new ArrayList<>();
     private RecipeDetailClickListener recipeDetailClickListener;
@@ -32,7 +32,7 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
-        notifyItemRangeInserted(0, steps.size());
+        notifyDataSetChanged();
     }
 
     @Override
@@ -45,7 +45,15 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
 
     @Override
     public void onBindViewHolder(RecipeDetailsViewHolder holder, int position) {
-        Step step = steps.get(position);
+
+        if (position == 0) {
+            holder.itemRecipeDetailBinding.nameTextView.setText(R.string.ingredients);
+            holder.itemRecipeDetailBinding.detailsCardView.setOnClickListener(view -> recipeDetailClickListener.onIngredientsClicked());
+
+            return;
+        }
+
+        Step step = steps.get(position - 1);
 
         holder.itemRecipeDetailBinding.nameTextView.setText(getNameSpannable(step));
         holder.itemRecipeDetailBinding.detailsCardView.setOnClickListener(view -> recipeDetailClickListener.onStepClicked(step));
@@ -73,7 +81,7 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
 
     @Override
     public int getItemCount() {
-        return steps.size();
+        return steps.size() + 1;
     }
 
     public class RecipeDetailsViewHolder extends RecyclerView.ViewHolder {

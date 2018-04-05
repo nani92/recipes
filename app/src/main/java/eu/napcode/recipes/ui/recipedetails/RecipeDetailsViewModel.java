@@ -1,4 +1,4 @@
-package eu.napcode.recipes.recipedetails;
+package eu.napcode.recipes.ui.recipedetails;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

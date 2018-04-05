@@ -1,4 +1,4 @@
-package eu.napcode.recipes.recipes;
+package eu.napcode.recipes.ui.recipes;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,13 +18,13 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ActivityRecipesBinding;
-import eu.napcode.recipes.recipedetails.RecipeDetailsActivity;
+import eu.napcode.recipes.ui.recipedetails.RecipeDetailsActivity;
 import eu.napcode.recipes.repository.Resource;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Recipe;
 
-import static eu.napcode.recipes.recipedetails.RecipeDetailsActivity.RECIPE_ID_KEY;
-import static eu.napcode.recipes.recipedetails.RecipeDetailsActivity.RECIPE_NAME;
+import static eu.napcode.recipes.ui.recipedetails.RecipeDetailsActivity.RECIPE_ID_KEY;
+import static eu.napcode.recipes.ui.recipedetails.RecipeDetailsActivity.RECIPE_NAME;
 
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.RecipeClickListener {
 

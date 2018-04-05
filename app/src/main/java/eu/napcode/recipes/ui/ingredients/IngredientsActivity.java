@@ -1,4 +1,4 @@
-package eu.napcode.recipes.step;
+package eu.napcode.recipes.ui.ingredients;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
 
-public class StepActivity extends AppCompatActivity {
+public class IngredientsActivity extends AppCompatActivity {
 
-    public static String STEP_ID_KEY = "step id ";
     public static String RECIPE_ID_KEY = "recipe id";
 
     @Override
@@ -17,10 +16,7 @@ public class StepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
 
-        AndroidInjection.inject(this);
-
-        StepFragment fragment = StepFragment.newInstance(
-                getIntent().getIntExtra(STEP_ID_KEY, 0),
+        IngredientsFragment fragment = IngredientsFragment.newInstance(
                 getIntent().getIntExtra(RECIPE_ID_KEY, 0));
 
         getSupportFragmentManager()

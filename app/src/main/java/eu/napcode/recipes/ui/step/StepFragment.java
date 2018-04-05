@@ -1,4 +1,4 @@
-package eu.napcode.recipes.step;
+package eu.napcode.recipes.ui.step;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;

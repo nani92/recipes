@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/base_margin">
+
+        <TextView
+            android:id="@+id/ingredientNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/ingredient_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/measureTextView"
+            tools:text="@tools:sample/lorem"/>
+
+        <TextView
+            android:id="@+id/measureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="@tools:sample/lorem"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@color/colorAccent"
+            app:layout_constraintTop_toBottomOf="@id/ingredientNameTextView"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

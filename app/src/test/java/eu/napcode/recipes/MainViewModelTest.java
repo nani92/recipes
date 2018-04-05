@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.napcode.recipes.model.Recipe;
-import eu.napcode.recipes.recipes.RecipesViewModel;
+import eu.napcode.recipes.ui.recipes.RecipesViewModel;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
 import eu.napcode.recipes.repository.Resource;
 import io.reactivex.Flowable;

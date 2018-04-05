@@ -3,4 +3,5 @@
     <string name="next_step">Next step</string>
 
     <string name="servings_format">Servings %d</string>
+    <string name="ingredients">Ingredients</string>
 </resources>
