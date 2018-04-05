@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -76,16 +77,18 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
     private void displayRecipes(List<Recipe> data) {
         this.recipesAdapter.setRecipes(data);
+        this.binding.recipesRecyclerView.scheduleLayoutAnimation();
     }
 
     private void setupRecyclerView() {
         setupLayoutManager();
         this.recipesAdapter = new RecipesAdapter(this, this);
         this.binding.recipesRecyclerView.setAdapter(recipesAdapter);
+        this.binding.recipesRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_rv));
     }
 
     private void setupLayoutManager() {
-        
+
         if (getResources().getBoolean(R.bool.isTablet)) {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {

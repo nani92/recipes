@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         this.binding.recipeDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.recipesDetailsAdapter = new RecipeDetailsAdapter(this,this);
         this.binding.recipeDetailsRecyclerView.setAdapter(recipesDetailsAdapter);
+        this.binding.recipeDetailsRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_rv));
     }
 
     private void setupViewModel() {
@@ -70,6 +72,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
                 break;
             case SUCCESS:
                 this.recipesDetailsAdapter.setSteps(stepResource.data);
+                this.binding.recipeDetailsRecyclerView.scheduleLayoutAnimation();
+
                 break;
             case ERROR:
                 //TODO go back?
