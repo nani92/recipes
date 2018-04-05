@@ -9,15 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 import eu.napcode.recipes.R;
-import eu.napcode.recipes.databinding.FragmentStepBinding;
+import eu.napcode.recipes.databinding.FragmentIngredientsBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
-import eu.napcode.recipes.model.Step;
+import eu.napcode.recipes.model.Ingredient;
 
 public class IngredientsFragment extends Fragment {
+    //TODO rv for ingredients, adapter, item, display
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -25,7 +28,7 @@ public class IngredientsFragment extends Fragment {
     public static final String RECIPE_ID_KEY = "recipe id";
 
     private IngredientsViewModel viewModel;
-    private FragmentStepBinding binding;
+    private FragmentIngredientsBinding binding;
 
     public static IngredientsFragment newInstance( int recipeId) {
         Bundle bundle = new Bundle();
@@ -58,17 +61,17 @@ public class IngredientsFragment extends Fragment {
         viewModel.setRecipeInfo(
                 getArguments().getInt(RECIPE_ID_KEY));
 
-//        viewModel.getStep().observe(this,
-//                step -> displayStepDetails(step));
+        viewModel.getIngredients().observe(this,
+                ingredients -> displayStepDetails(ingredients));
     }
 
-    void displayStepDetails(Step step) {
+    void displayStepDetails(List<Ingredient> ingredients) {
 
-        if (step == null) {
+        if (ingredients == null) {
             //TODO display something
         }
 
-        this.binding.titleTextView.setText(step.getShortDescription());
-        this.binding.descriptionTextView.setText(step.getDescription());
+//        this.binding.titleTextView.setText(step.getShortDescription());
+//        this.binding.descriptionTextView.setText(step.getDescription());
     }
 }
