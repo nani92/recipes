@@ -1,7 +1,12 @@
 package eu.napcode.recipes.recipedetails;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,11 +21,13 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
 
     private List<Step> steps = new ArrayList<>();
     private RecipeDetailClickListener recipeDetailClickListener;
+    private Context context;
 
     //TODO add ingredients to display
 
-    public RecipeDetailsAdapter(RecipeDetailClickListener recipeClickListener) {
+    public RecipeDetailsAdapter(Context context, RecipeDetailClickListener recipeClickListener) {
         this.recipeDetailClickListener = recipeClickListener;
+        this.context = context;
     }
 
     public void setSteps(List<Step> steps) {
@@ -40,8 +47,28 @@ class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.Rec
     public void onBindViewHolder(RecipeDetailsViewHolder holder, int position) {
         Step step = steps.get(position);
 
-        holder.itemRecipeDetailBinding.nameTextView.setText(step.getShortDescription());
-        holder.itemRecipeDetailBinding.recipeDetailConstraintLayout.setOnClickListener(view -> recipeDetailClickListener.onStepClicked(step));
+        holder.itemRecipeDetailBinding.nameTextView.setText(getNameSpannable(step));
+        holder.itemRecipeDetailBinding.detailsCardView.setOnClickListener(view -> recipeDetailClickListener.onStepClicked(step));
+    }
+
+    public SpannableString getNameSpannable(Step step) {
+        String name = String.format("%d. %s", step.getId(), step.getShortDescription());
+        int dotPosition = name.indexOf('.') + 1;
+        int colorAccent = ContextCompat.getColor(context, R.color.colorAccent);
+        int colorPrimary = ContextCompat.getColor(context, R.color.colorPrimary);
+
+        SpannableString spannableString = new SpannableString(name);
+        spannableString.setSpan(new ForegroundColorSpan(colorAccent),
+                0,
+                dotPosition,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        spannableString.setSpan(new ForegroundColorSpan(colorPrimary),
+                dotPosition,
+                name.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return spannableString;
     }
 
     @Override

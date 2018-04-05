@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
+import eu.napcode.recipes.cupcake.CupcakeFragment;
 import eu.napcode.recipes.databinding.ActivityRecipeDetailsBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Step;
@@ -24,6 +26,7 @@ import eu.napcode.recipes.step.StepFragment;
 public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailsAdapter.RecipeDetailClickListener {
 
     public static final String RECIPE_ID_KEY = "recipe id";
+    public static final String RECIPE_NAME = "recipe name";
 
     private ActivityRecipeDetailsBinding binding;
     private RecipeDetailsAdapter recipesDetailsAdapter;
@@ -42,12 +45,16 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         setupRecyclerView();
         setupViewModel();
         viewModel.getSteps().observe(this, this::processResponse);
+
+        getSupportActionBar().setTitle(getIntent().getStringExtra(RECIPE_NAME));
+        displayEmptyViewForTwoPane();
     }
 
     private void setupRecyclerView() {
         this.binding.recipeDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.recipesDetailsAdapter = new RecipeDetailsAdapter(this);
+        this.recipesDetailsAdapter = new RecipeDetailsAdapter(this,this);
         this.binding.recipeDetailsRecyclerView.setAdapter(recipesDetailsAdapter);
+        this.binding.recipeDetailsRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_rv));
     }
 
     private void setupViewModel() {
@@ -65,10 +72,23 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
                 break;
             case SUCCESS:
                 this.recipesDetailsAdapter.setSteps(stepResource.data);
+                this.binding.recipeDetailsRecyclerView.scheduleLayoutAnimation();
+
                 break;
             case ERROR:
                 //TODO go back?
                 break;
+        }
+    }
+
+    private void displayEmptyViewForTwoPane() {
+        boolean isTwoPane = this.binding.detailsContainer != null;
+
+        if (isTwoPane) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.detailsContainer, new CupcakeFragment())
+                    .commit();
         }
     }
 
