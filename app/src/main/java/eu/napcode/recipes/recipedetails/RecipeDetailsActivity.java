@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
+import eu.napcode.recipes.cupcake.CupcakeFragment;
 import eu.napcode.recipes.databinding.ActivityRecipeDetailsBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Step;
@@ -45,6 +46,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         viewModel.getSteps().observe(this, this::processResponse);
 
         getSupportActionBar().setTitle(getIntent().getStringExtra(RECIPE_NAME));
+        displayEmptyViewForTwoPane();
     }
 
     private void setupRecyclerView() {
@@ -72,6 +74,17 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
             case ERROR:
                 //TODO go back?
                 break;
+        }
+    }
+
+    private void displayEmptyViewForTwoPane() {
+        boolean isTwoPane = this.binding.detailsContainer != null;
+
+        if (isTwoPane) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.detailsContainer, new CupcakeFragment())
+                    .commit();
         }
     }
 
