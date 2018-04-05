@@ -1,4 +1,4 @@
-package eu.napcode.recipes.cupcake;
+package eu.napcode.recipes.ui.cupcake;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".recipes.RecipesActivity">
+        <activity android:name=".ui.recipes.RecipesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".recipedetails.RecipeDetailsActivity"/>
+        <activity android:name=".ui.recipedetails.RecipeDetailsActivity"/>
 
-        <activity android:name=".step.StepActivity"/>
+        <activity android:name=".ui.step.StepActivity"/>
     </application>
 
 </manifest>

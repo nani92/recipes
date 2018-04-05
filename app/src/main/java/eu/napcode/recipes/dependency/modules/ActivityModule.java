@@ -2,9 +2,9 @@ package eu.napcode.recipes.dependency.modules;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import eu.napcode.recipes.recipedetails.RecipeDetailsActivity;
-import eu.napcode.recipes.recipes.RecipesActivity;
-import eu.napcode.recipes.step.StepActivity;
+import eu.napcode.recipes.ui.recipedetails.RecipeDetailsActivity;
+import eu.napcode.recipes.ui.recipes.RecipesActivity;
+import eu.napcode.recipes.ui.step.StepActivity;
 
 @Module
 public interface ActivityModule {

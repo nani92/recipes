@@ -2,7 +2,7 @@ package eu.napcode.recipes.dependency.modules;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import eu.napcode.recipes.step.StepFragment;
+import eu.napcode.recipes.ui.step.StepFragment;
 
 @Module
 public interface FragmentModule {

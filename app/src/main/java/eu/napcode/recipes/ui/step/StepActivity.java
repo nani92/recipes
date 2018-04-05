@@ -1,4 +1,4 @@
-package eu.napcode.recipes.step;
+package eu.napcode.recipes.ui.step;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package eu.napcode.recipes.recipedetails;
+package eu.napcode.recipes.ui.recipedetails;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -15,13 +15,13 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
-import eu.napcode.recipes.cupcake.CupcakeFragment;
+import eu.napcode.recipes.ui.cupcake.CupcakeFragment;
 import eu.napcode.recipes.databinding.ActivityRecipeDetailsBinding;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
 import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.repository.Resource;
-import eu.napcode.recipes.step.StepActivity;
-import eu.napcode.recipes.step.StepFragment;
+import eu.napcode.recipes.ui.step.StepActivity;
+import eu.napcode.recipes.ui.step.StepFragment;
 
 public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailsAdapter.RecipeDetailClickListener {
 
