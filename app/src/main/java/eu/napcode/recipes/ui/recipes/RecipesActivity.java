@@ -30,6 +30,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
     private static final int LANDSCAPE_COLUMN_COUNT = 2;
     private static final int TABLET_LANDSCAPE_COLUMN_COUNT = 3;
+
     @Inject
     ViewModelFactory viewModelFactory;
 

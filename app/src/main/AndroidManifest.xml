@@ -28,6 +28,8 @@
 
         <activity android:name=".ui.ingredients.IngredientsActivity"/>
 
+        <activity android:name=".ui.widget.ChooseRecipeToWidgetActivity"/>
+
         <receiver
             android:name=".ui.widget.RecipeWidgetProvider">
 
