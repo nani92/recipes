@@ -30,6 +30,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
     private static final int LANDSCAPE_COLUMN_COUNT = 2;
     private static final int TABLET_LANDSCAPE_COLUMN_COUNT = 3;
+
     @Inject
     ViewModelFactory viewModelFactory;
 
@@ -72,7 +73,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     }
 
     private void displayMessage(String message) {
-        Snackbar.make(this.binding.recipesRecyclerView, message, Snackbar.LENGTH_LONG);
+        Snackbar.make(this.binding.recipesRecyclerView, message, Snackbar.LENGTH_LONG).show();
     }
 
     private void displayRecipes(List<Recipe> data) {
