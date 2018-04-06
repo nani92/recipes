@@ -83,7 +83,7 @@ public class ChooseRecipeToWidgetActivity extends AppCompatActivity {
     }
 
     private void displayMessage(String message) {
-        Snackbar.make(this.binding.container, message, Snackbar.LENGTH_LONG);
+        Snackbar.make(this.binding.container, message, Snackbar.LENGTH_LONG).show();
     }
 
     private void initializeAppWidget() {
