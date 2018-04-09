@@ -1,16 +1,12 @@
 package eu.napcode.recipes.ui.recipes;
 
 import android.content.ComponentName;
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,14 +27,13 @@ import static android.support.test.espresso.intent.Intents.intended;
 public class RecipesActivityTest {
 
     IdlingResource idlingResource;
-    RecipesActivity recipesActivity;
 
     @Rule
     public IntentsTestRule<RecipesActivity> recipesActivityRule =
             new IntentsTestRule<>(RecipesActivity.class);
 
+    @Before
     public void registerIdlingResource() {
-        recipesActivity = recipesActivityRule.getActivity();
         idlingResource = recipesActivityRule.getActivity().idlingResource;
     }
 
