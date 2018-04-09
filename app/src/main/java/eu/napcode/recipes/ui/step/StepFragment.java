@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,9 @@ public class StepFragment extends Fragment {
     void displayStepDetails(Step step) {
 
         if (step == null) {
-            //TODO display something
+            Snackbar.make(this.binding.contraintLayout, R.string.error, Snackbar.LENGTH_LONG).show();
+
+            return;
         }
 
         this.binding.titleTextView.setText(step.getShortDescription());
