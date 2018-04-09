@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import java.util.List;
@@ -61,9 +62,9 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     private void processResponse(Resource<List<Recipe>> recipeListResource) {
 
         if (recipeListResource.status == Resource.Status.LOADING) {
-            //TODO show pb
+            this.binding.progressBar.setVisibility(View.VISIBLE);
         } else {
-            //TODO hide pb
+            this.binding.progressBar.setVisibility(View.GONE);
         }
 
         if (recipeListResource.status == Resource.Status.ERROR) {
