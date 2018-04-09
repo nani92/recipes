@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import eu.napcode.recipes.R;
 import eu.napcode.recipes.databinding.ActivityRecipesBinding;
+import eu.napcode.recipes.idlingResource.RecipesIdlingResource;
 import eu.napcode.recipes.ui.recipedetails.RecipeDetailsActivity;
 import eu.napcode.recipes.repository.Resource;
 import eu.napcode.recipes.dependency.modules.viewmodel.ViewModelFactory;
@@ -37,6 +39,9 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     private ActivityRecipesBinding binding;
     private RecipesViewModel mainViewModel;
     private RecipesAdapter recipesAdapter;
+
+    @Nullable
+    RecipesIdlingResource idlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +84,10 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     private void displayRecipes(List<Recipe> data) {
         this.recipesAdapter.setRecipes(data);
         this.binding.recipesRecyclerView.scheduleLayoutAnimation();
+
+        if (idlingResource != null) {
+            idlingResource.setIdleState(true);
+        }
     }
 
     private void setupRecyclerView() {

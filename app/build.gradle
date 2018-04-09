@@ -36,7 +36,15 @@ dependencies {
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
+
+    //espresso
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso.idling:idling-concurrent:3.0.1'
+    compile 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
+
+    //mockito
     testCompile "org.mockito:mockito-core:2.15.0"
 
     //gson
