@@ -50,7 +50,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         viewModel.getSteps().observe(this, this::processResponse);
 
         getSupportActionBar().setTitle(getIntent().getStringExtra(RECIPE_NAME));
-        displayEmptyViewForTwoPane();
+
+        if (savedInstanceState == null) {
+            displayEmptyViewForTwoPane();
+        }
     }
 
     private void setupRecyclerView() {
