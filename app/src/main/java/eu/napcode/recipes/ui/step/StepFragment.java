@@ -128,7 +128,7 @@ public class StepFragment extends Fragment {
 
     private void displayVideo(String videoUrl, long position) {
 
-        if (videoUrl.isEmpty()) {
+        if (TextUtils.isEmpty(videoUrl)) {
             return;
         }
 

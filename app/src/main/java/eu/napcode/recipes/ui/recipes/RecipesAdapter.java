@@ -3,6 +3,7 @@ package eu.napcode.recipes.ui.recipes;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -49,7 +50,7 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolde
         String servings = String.format(context.getString(R.string.servings_format), recipe.getServings());
         holder.itemRecipeBinding.servingsTextView.setText(servings);
 
-        if (recipe.getImage().isEmpty()) {
+        if (TextUtils.isEmpty(recipe.getImage())) {
             return;
         }
 
