@@ -22,9 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.recipedetails.RecipeDetailsActivity"/>
+        <activity
+            android:name=".ui.recipedetails.RecipeDetailsActivity"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.step.StepActivity"/>
+        <activity
+            android:name=".ui.step.StepActivity"
+            android:parentActivityName=".ui.recipedetails.RecipeDetailsActivity"/>
 
         <activity android:name=".ui.ingredients.IngredientsActivity"/>
 
