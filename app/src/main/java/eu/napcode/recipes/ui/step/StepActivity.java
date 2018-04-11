@@ -19,6 +19,8 @@ public class StepActivity extends AppCompatActivity {
 
         AndroidInjection.inject(this);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         StepFragment fragment = StepFragment.newInstance(
                 getIntent().getIntExtra(STEP_ID_KEY, 0),
                 getIntent().getIntExtra(RECIPE_ID_KEY, 0));
