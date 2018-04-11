@@ -25,6 +25,10 @@ public class StepActivity extends AppCompatActivity {
                 getIntent().getIntExtra(STEP_ID_KEY, 0),
                 getIntent().getIntExtra(RECIPE_ID_KEY, 0));
 
+        if (savedInstanceState != null) {
+            return;
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.detailsContainer, fragment)
