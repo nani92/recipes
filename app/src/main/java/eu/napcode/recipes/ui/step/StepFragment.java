@@ -133,6 +133,7 @@ public class StepFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.detailsContainer, fragment)
+                        .addToBackStack(null)
                         .commit();
             });
         } else {
