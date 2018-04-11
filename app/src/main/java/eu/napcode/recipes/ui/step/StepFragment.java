@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -85,6 +87,12 @@ public class StepFragment extends Fragment {
             Snackbar.make(this.binding.contraintLayout, R.string.error, Snackbar.LENGTH_LONG).show();
 
             return;
+        }
+
+        if (!TextUtils.isEmpty(step.getThumbnailURL())) {
+            Picasso.get()
+                    .load(step.getThumbnailURL())
+                    .into(this.binding.thumbnailImageView);
         }
 
         this.binding.titleTextView.setText(step.getShortDescription());

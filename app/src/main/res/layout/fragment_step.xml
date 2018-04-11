@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
@@ -22,6 +23,17 @@
                 app:layout_constraintTop_toBottomOf="@id/topGuideline"
                 tools:text="@tools:sample/lorem"/>
 
+            <ImageView
+                android:id="@+id/thumbnailImageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@id/leftGuideline"
+                app:layout_constraintRight_toLeftOf="@id/rightGuideline"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                tools:src="@drawable/ic_cupcake"
+                tools:visibility="visible"/>
+
             <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                 android:id="@+id/videoPlayer"
                 android:layout_width="0dp"
@@ -30,7 +42,7 @@
                 android:visibility="gone"
                 app:layout_constraintLeft_toRightOf="@id/leftGuideline"
                 app:layout_constraintRight_toLeftOf="@id/rightGuideline"
-                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@id/thumbnailImageView"
                 tools:visibility="visible"/>
 
             <TextView
