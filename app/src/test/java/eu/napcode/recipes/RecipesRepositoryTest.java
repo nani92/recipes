@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.napcode.recipes.api.RecipeService;
+import eu.napcode.recipes.dao.ingredients.IngredientDao;
 import eu.napcode.recipes.dao.recipe.RecipeDao;
 import eu.napcode.recipes.dao.recipe.RecipeEntity;
 import eu.napcode.recipes.dao.step.StepDao;
 import eu.napcode.recipes.dao.step.StepEntity;
+import eu.napcode.recipes.model.Ingredient;
 import eu.napcode.recipes.model.Recipe;
 import eu.napcode.recipes.model.Step;
 import eu.napcode.recipes.repository.recipes.RecipesRepository;
@@ -43,11 +45,14 @@ public class RecipesRepositoryTest {
     @Mock
     StepDao stepDao;
 
+    @Mock
+    IngredientDao ingredientDao;
+
     private RecipesRepository recipesRepository;
 
     @Before
     public void initial() {
-        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao, stepDao, new MockRxSchedulers());
+        recipesRepository = new RecipesRepositoryImpl(recipeService, recipeDao, stepDao, ingredientDao, new MockRxSchedulers());
     }
 
     @Test
